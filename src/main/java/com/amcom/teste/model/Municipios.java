@@ -2,9 +2,10 @@ package com.amcom.teste.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity(name="municipio")
-public class Municipio {
+@Entity(name = "municipios")
+public class Municipios {
 	
 	@Id
 	private long ibge_id;
