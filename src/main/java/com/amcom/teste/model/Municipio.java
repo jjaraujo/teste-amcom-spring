@@ -2,18 +2,17 @@ package com.amcom.teste.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity(name = "municipios")
-public class Municipios {
+@Entity(name = "municipio")
+public class Municipio {
 	
 	@Id
 	private long ibge_id;
 	private String uf;
 	private String name;
 	private boolean capital;
-	private String lon;
-	private String lat;
+	private double lon;
+	private double lat;
 	private String no_accents;
 	private String alternative_names;
 	private String microregion;
@@ -44,16 +43,16 @@ public class Municipios {
 	public void setCapital(boolean capital) {
 		this.capital = capital;
 	}
-	public String getLon() {
+	public double getLon() {
 		return lon;
 	}
-	public void setLon(String lon) {
+	public void setLon(double lon) {
 		this.lon = lon;
 	}
-	public String getLat() {
+	public double getLat() {
 		return lat;
 	}
-	public void setLat(String lat) {
+	public void setLat(double lat) {
 		this.lat = lat;
 	}
 	public String getNo_accents() {
