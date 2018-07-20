@@ -1,4 +1,4 @@
-package com.amcom.teste.configuracao;
+package com.amcom.teste.controle;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -18,30 +18,26 @@ import com.amcom.teste.repositorios.MunicipioRepository;
 
 public class ConversorCsv {
 	
-	@Autowired
-	MunicipioRepository municipioRepository;
-	
-	public static void main(String[] args) {
-	}
-
-	public void csvParaBaseSql(String arquivo) {
+	public List<Municipio> csvParaList(String arquivo) {
 		// "C:\\Users\\Joao Junior\\Documents\\Trabalho Java - Cidades.csv"
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(arquivo)));
 			String linha = null;
-			List<Municipio> setMunicipios = new ArrayList<>();
+			List<Municipio> municipios = new ArrayList<>();
 			
 			while ((linha = reader.readLine()) != null) {
 
 				String[] dadosUsuario = linha.split(",");
-				setMunicipios.add(newMunicipio(dadosUsuario));
+				municipios.add(newMunicipio(dadosUsuario));
 			}
-			
-			municipioRepository.saveAll(setMunicipios);
-			
+
 			reader.close();
+			
+			return municipios;
+			
 		} catch (IOException e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 	
@@ -56,13 +52,12 @@ public class ConversorCsv {
 		municipio.setUf(dadosUsuario[1]);
 		municipio.setName(dadosUsuario[2]);
 		municipio.setCapital(stringToBoolean(dadosUsuario[3]));
-		municipio.setLon(dadosUsuario[4]);
-		municipio.setNo_accents(dadosUsuario[5]);
-		municipio.setAlternative_names(dadosUsuario[6]);
-		municipio.setMicroregion(dadosUsuario[7]);
-		municipio.setMesoregion(dadosUsuario[8]);
+		municipio.setLon(Double.parseDouble(dadosUsuario[4]));
+		municipio.setLat(Double.parseDouble(dadosUsuario[5]));
+		municipio.setNo_accents(dadosUsuario[6]);
+		municipio.setAlternative_names(dadosUsuario[7]);
+		municipio.setMesoregion(dadosUsuario[9].trim());
 		
 		return municipio;
 	}
-	
 }
